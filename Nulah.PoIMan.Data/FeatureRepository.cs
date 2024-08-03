@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Nulah.PoIMan.Data.Models;
 using Nulah.PoIMan.Domain.Enums;
+using Nulah.PoIMan.Domain.Exceptions;
 using Nulah.PoIMan.Domain.Features;
 using Nulah.PoIMan.Domain.Interfaces;
 
@@ -79,13 +80,5 @@ public class FeatureRepository : IFeatureRepository
 		}
 
 		return featureDto;
-	}
-}
-
-public class UserNotFoundException : Exception
-{
-	public UserNotFoundException(int userId)
-		: base($"No user found with user Id: {userId}")
-	{
 	}
 }
