@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nulah.PoIMan.Data", "Nulah.PoIMan.Data\Nulah.PoIMan.Data.csproj", "{C2C25296-13DA-4C60-9AED-B134CF52FAE8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nulah.PoIMan.Api", "Nulah.PoIMan.Api\Nulah.PoIMan.Api.csproj", "{8D942CE1-9FE7-4C17-98F7-5E4AF70716D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nulah.PoIMan.Domain", "Nulah.PoIMan.Domain\Nulah.PoIMan.Domain.csproj", "{9357B546-44E9-4267-ADBD-5863CBBC0870}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C2C25296-13DA-4C60-9AED-B134CF52FAE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2C25296-13DA-4C60-9AED-B134CF52FAE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2C25296-13DA-4C60-9AED-B134CF52FAE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2C25296-13DA-4C60-9AED-B134CF52FAE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D942CE1-9FE7-4C17-98F7-5E4AF70716D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D942CE1-9FE7-4C17-98F7-5E4AF70716D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D942CE1-9FE7-4C17-98F7-5E4AF70716D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D942CE1-9FE7-4C17-98F7-5E4AF70716D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9357B546-44E9-4267-ADBD-5863CBBC0870}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9357B546-44E9-4267-ADBD-5863CBBC0870}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9357B546-44E9-4267-ADBD-5863CBBC0870}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9357B546-44E9-4267-ADBD-5863CBBC0870}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
