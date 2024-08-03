@@ -3,5 +3,6 @@
 public enum FeatureType
 {
 	Feature,
-	Shop
+	Shop,
+	Cafe
 }

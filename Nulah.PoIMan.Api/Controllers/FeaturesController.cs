@@ -9,15 +9,13 @@ namespace Nulah.PoIMan.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class FeatureController : ControllerBase
+public class FeaturesController : ControllerBase
 {
 	private readonly IFeatureRepository _featureRepository;
-	private readonly IUserRepository _userRepository;
 
-	public FeatureController(IFeatureRepository featureRepository, IUserRepository userRepository)
+	public FeaturesController(IFeatureRepository featureRepository)
 	{
 		_featureRepository = featureRepository;
-		_userRepository = userRepository;
 	}
 
 	[AllowAnonymous]
@@ -36,6 +34,7 @@ public class FeatureController : ControllerBase
 		var userId = HttpContext.User.Claims
 			.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)
 			?.Value;
+
 		// If we've reached this point then technically this shouldn't be possible, however I also trust nothing
 		if (string.IsNullOrWhiteSpace(userId))
 		{

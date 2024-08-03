@@ -75,8 +75,13 @@ public class FeatureRepository : IFeatureRepository
 			case FeatureType.Shop:
 				featureDto = new Shop(feature.Latitude, feature.Longitude, feature.Name);
 				break;
+			case FeatureType.Cafe:
+				featureDto = new Cafe(feature.Latitude, feature.Longitude, feature.Name);
+				break;
 			default:
-				throw new ArgumentOutOfRangeException();
+				// fallback to a generic feature and discard all feature specific information
+				featureDto = new FeatureBase(FeatureType.Feature, feature.Latitude, feature.Longitude, feature.Name);
+				break;
 		}
 
 		return featureDto;

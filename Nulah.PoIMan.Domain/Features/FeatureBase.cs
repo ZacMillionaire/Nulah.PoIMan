@@ -3,6 +3,9 @@ using Nulah.PoIMan.Domain.Enums;
 
 namespace Nulah.PoIMan.Domain.Features;
 
+/// <summary>
+/// Primary return type for all features - enables future extended feature types
+/// </summary>
 public class FeatureBase
 {
 	public FeatureType Type { get; }

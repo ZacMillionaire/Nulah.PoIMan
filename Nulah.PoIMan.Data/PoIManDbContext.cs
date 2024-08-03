@@ -30,7 +30,16 @@ public class PoIManDbContext : DbContext
 			.Properties<DateTimeOffset>()
 			.HaveConversion<DateTimeOffsetConverter>();
 	}
-
+	
+	protected override void OnModelCreating(ModelBuilder modelBuilder)
+	{
+		modelBuilder.Entity<Feature>()
+			.HasDiscriminator<string>("feature_type")
+			.HasValue<Feature>("feature_base")
+			.HasValue<ShopFeature>("shop")
+			.HasValue<CafeFeature>("cafe");
+	}
+	
 	public override int SaveChanges()
 	{
 		SetCreatedUpdatedForSavingEntities();
