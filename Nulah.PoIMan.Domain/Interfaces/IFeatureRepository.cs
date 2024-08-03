@@ -6,5 +6,5 @@ public interface IFeatureRepository
 {
 	public Task<List<FeatureBase>> GetFeatures();
 
-	public Task<FeatureBase> CreateFeature(FeatureBase featureBase);
+	public Task<FeatureBase> CreateFeature(FeatureBase featureBase, int userId);
 }

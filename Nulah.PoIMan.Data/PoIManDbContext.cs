@@ -12,6 +12,13 @@ public class PoIManDbContext : DbContext
 
 	private TimeProvider _timeProvider = TimeProvider.System;
 
+	/// <summary>
+	/// Used for migrations
+	/// </summary>
+	public PoIManDbContext()
+	{
+	}
+
 	public PoIManDbContext(DbContextOptions<PoIManDbContext> options) : base(options)
 	{
 	}

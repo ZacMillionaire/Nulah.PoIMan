@@ -9,5 +9,5 @@ internal class Feature : BaseEntity
 	public double Longitude { get; set; }
 	public string Name { get; set; }
 	public User CreatedBy { get; set; }
-	public List<Tag> Tags { get; set; }
+	public List<Tag> Tags { get; set; } = new();
 }

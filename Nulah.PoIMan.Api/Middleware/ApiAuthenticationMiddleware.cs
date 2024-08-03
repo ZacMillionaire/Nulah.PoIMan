@@ -72,7 +72,12 @@ public class ApiKeyAuthenticationHandler : AuthenticationHandler<ApiKeyAuthentic
 		}
 	}
 
-
+	/// <summary>
+	/// Required to ensure the response correctly has a message, otherwise any auth failures above will just be an empty
+	/// 401
+	/// </summary>
+	/// <param name="properties"></param>
+	/// <returns></returns>
 	protected override Task HandleChallengeAsync(AuthenticationProperties properties)
 	{
 		Response.StatusCode = 401;

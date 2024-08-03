@@ -80,6 +80,7 @@ public class Program
 #endif
 
 		var app = builder.Build();
+		
 #if DEBUG
 		// Configure the HTTP request pipeline.
 		if (app.Environment.IsDevelopment())

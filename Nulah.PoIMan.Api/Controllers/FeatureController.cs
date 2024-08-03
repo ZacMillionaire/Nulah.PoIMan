@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Nulah.PoIMan.Api.Middleware;
 using Nulah.PoIMan.Domain.Features;
@@ -11,10 +12,12 @@ namespace Nulah.PoIMan.Api.Controllers;
 public class FeatureController : ControllerBase
 {
 	private readonly IFeatureRepository _featureRepository;
+	private readonly IUserRepository _userRepository;
 
-	public FeatureController(IFeatureRepository featureRepository)
+	public FeatureController(IFeatureRepository featureRepository, IUserRepository userRepository)
 	{
 		_featureRepository = featureRepository;
+		_userRepository = userRepository;
 	}
 
 	[AllowAnonymous]
@@ -25,19 +28,20 @@ public class FeatureController : ControllerBase
 		return Ok(await _featureRepository.GetFeatures());
 	}
 
-	[AllowAnonymous]
+	[Authorize(ApiKeyAuthenticationOptions.PolicyName)]
 	[HttpPost]
 	[Route("Create")]
 	public async Task<ActionResult<FeatureBase>> CreateFeature([FromBody] FeatureBase featureBase)
 	{
-		return Ok(await _featureRepository.CreateFeature(featureBase));
-	}
+		var userId = HttpContext.User.Claims
+			.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)
+			?.Value;
+		// If we've reached this point then technically this shouldn't be possible, however I also trust nothing
+		if (string.IsNullOrWhiteSpace(userId))
+		{
+			return BadRequest("Invalid User");
+		}
 
-	[Authorize(ApiKeyAuthenticationOptions.PolicyName)]
-	[HttpGet]
-	[Route("ListProtected")]
-	public async Task<ActionResult<List<FeatureBase>>> ListFeaturesProtected()
-	{
-		return Ok(await _featureRepository.GetFeatures());
+		return Ok(await _featureRepository.CreateFeature(featureBase, int.Parse(userId)));
 	}
 }

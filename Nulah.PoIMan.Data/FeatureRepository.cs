@@ -15,8 +15,14 @@ public class FeatureRepository : IFeatureRepository
 		_context = context;
 	}
 
-	public async Task<FeatureBase> CreateFeature(FeatureBase featureBase)
+	public async Task<FeatureBase> CreateFeature(FeatureBase featureBase, int userId)
 	{
+		var creatingUser = _context.Users.FirstOrDefault(x => x.Id == userId);
+		if (creatingUser == null)
+		{
+			throw new UserNotFoundException(userId);
+		}
+
 		Feature newFeature;
 		switch (featureBase.Type)
 		{
@@ -42,22 +48,44 @@ public class FeatureRepository : IFeatureRepository
 				throw new ArgumentOutOfRangeException();
 		}
 
+		newFeature.CreatedBy = creatingUser;
+
 		_context.Features.Add(newFeature);
 		await _context.SaveChangesAsync();
 
-		return new Shop(newFeature.Latitude, newFeature.Longitude, newFeature.Name)
-		{
-		};
+		return ConvertFeatureToType(newFeature);
 	}
 
 	public async Task<List<FeatureBase>> GetFeatures()
 	{
 		var existingFeatures = await _context.Features.ToListAsync();
 
-		return new List<FeatureBase>()
+		return existingFeatures.Select(ConvertFeatureToType).ToList();
+	}
+
+	private FeatureBase ConvertFeatureToType(Feature feature)
+	{
+		FeatureBase featureDto;
+		switch (feature.Type)
 		{
-			new Shop(-27.47473, 153.02723, "test"),
-			new Shop(-27.47399, 153.02654, "test 2")
-		};
+			case FeatureType.Feature:
+				featureDto = new FeatureBase(FeatureType.Feature, feature.Latitude, feature.Longitude, feature.Name);
+				break;
+			case FeatureType.Shop:
+				featureDto = new Shop(feature.Latitude, feature.Longitude, feature.Name);
+				break;
+			default:
+				throw new ArgumentOutOfRangeException();
+		}
+
+		return featureDto;
+	}
+}
+
+public class UserNotFoundException : Exception
+{
+	public UserNotFoundException(int userId)
+		: base($"No user found with user Id: {userId}")
+	{
 	}
 }
